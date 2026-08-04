@@ -1,8 +1,29 @@
-    public int lastStoneWeight(int[] A) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b)-> b - a);
-        for (int a : A)
-            pq.offer(a);
-        while (pq.size() > 1)
-            pq.offer(pq.poll() - pq.poll());
-        return pq.poll();
+class KthLargest {
+    private int k;
+    private PriorityQueue<Integer> minHeap;
+
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        minHeap = new PriorityQueue<>(k);
+        for (int num : nums) {
+            if (minHeap.size() < k) {
+                minHeap.offer(num);
+            } else if (num > minHeap.peek()) {
+                minHeap.offer(num);
+                if (minHeap.size() > k) {
+                    minHeap.poll();
+                }
+            }
+        }
     }
+
+    public int add(int val) {
+        if (minHeap.size() < k) {
+            minHeap.offer(val);
+        } else if (val > minHeap.peek()) {
+            minHeap.offer(val);
+            minHeap.poll();
+        }
+        return minHeap.peek();
+    }
+}

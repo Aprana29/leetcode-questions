@@ -66,7 +66,7 @@ public class Main {
         int originalColor = image[sr][scol];
 
         // If original color is already new color
-        if (originalColor != newColor) {
+        if (origingit add .alColor != newColor) {
             floodFill(image, sr, scol, originalColor, newColor);
         }
 
